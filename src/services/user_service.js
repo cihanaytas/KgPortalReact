@@ -8,6 +8,11 @@ class UserService {
     return axios.get(API_URL + 'home');
   }
 
+
+  getBirthDays(){
+    return axios.get(API_URL + 'home/birth', { headers: authHeader() });
+  }
+
   getUserBoard() {
     return axios.get(API_URL + 'test', { headers: authHeader() });
   }
