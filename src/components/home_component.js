@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 import { Col, ListGroup, ListGroupItem, Row } from "reactstrap";
 
 import UserService from "../services/user_service";
@@ -8,43 +9,45 @@ export default class Home extends Component {
     super(props);
 
     this.state = {
-      content: "",
-      dogumgunleri:[]
+      dogumgunleri: [],
+      news: []
     };
   }
 
   componentDidMount() {
-    UserService.getPublicContent().then(
-      response => {
-        this.setState({
-          content: response.data
-        });
-      },
-    error => {
-      this.setState({
-        content:
-          (error.response && error.response.data) ||
-          error.message ||
-          error.toString()
-      });
-        }
-    );
+
 
     UserService.getBirthDays().then(
       response => {
-        console.log(response.data)
         this.setState({
-           dogumgunleri: response.data
+          dogumgunleri: response.data
         });
       },
-    error => {
-      this.setState({
-        content:
-          (error.response && error.response.data) ||
-          error.message ||
-          error.toString()
-      });
-        }
+      error => {
+        this.setState({
+          content:
+            (error.response && error.response.data) ||
+            error.message ||
+            error.toString()
+        });
+      }
+    );
+
+
+    UserService.getNews().then(
+      response => {
+        this.setState({
+          news: response.data
+        });
+      },
+      error => {
+        this.setState({
+          content:
+            (error.response && error.response.data) ||
+            error.message ||
+            error.toString()
+        });
+      }
     );
 
 
@@ -57,40 +60,56 @@ export default class Home extends Component {
     return (
       <div>
 
-      <div className="container">
-        <header className="jumbotron">
-          <h3>{this.state.content}</h3>
+        <div className="container">
+          <header className="jumbotron">
+           
+            <h3> ANASAYFA</h3>
 
-        </header>
-      </div>
-
-      <Row>
-                  <Col xs="3">
-                    DOĞUM GÜNÜ OLAN ÇALIŞANLAR
-                  <ListGroup>
-        {this.state.dogumgunleri.map(dogum => (
-            <ListGroupItem
-                key={dogum.username}>
-                {dogum.username}
-            </ListGroupItem>
-        ))}
-        </ListGroup>
-                  </Col>
-                  <Col xs="9">
-                      aaaaaaaaaa
-                  </Col>
-              </Row>
-
-    
-   
+          </header>
         </div>
 
+        <Row>
+          <Col xs="3">
+            DOĞUM GÜNÜ OLAN ÇALIŞANLAR
+                  <ListGroup>
+              {this.state.dogumgunleri.map(dogum => (
+                <ListGroupItem
+                  key={dogum.username}>
+                  {dogum.name} {dogum.surname}
+                </ListGroupItem>
+
+              ))}
+            </ListGroup>
+          </Col>
 
 
-             
-                            
-       
-            
+          <Col xs="9">
+            HABERLER
+            <ListGroup>
+              {this.state.news.map(haber => (
+                <ListGroupItem
+                  key={haber.id}>
+                  {haber.haber} {haber.date}
+                </ListGroupItem>
+              )
+
+              )}
+            </ListGroup>
+
+          </Col>
+
+        </Row>
+
+
+
+      </div>
+
+
+
+
+
+
+
 
 
 

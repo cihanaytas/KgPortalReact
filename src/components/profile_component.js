@@ -8,6 +8,7 @@ class Profile extends Component {
     const { user: currentUser } = this.props;
 
     if (!currentUser) {
+
       return <Redirect to="/login" />;
     }
 
@@ -15,7 +16,7 @@ class Profile extends Component {
       <div className="container">
         <header className="jumbotron">
           <h3>
-            <strong>{currentUser.username}</strong> Profile
+            <strong>{currentUser.userkg.username}</strong> Profile
           </h3>
         </header>
 

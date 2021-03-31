@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Router, Switch, Route, Link } from "react-router-dom";
+import {Link } from "react-router-dom";
+import { Router, Switch, Route} from 'react-router'
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 import Login from "./components/login_component";
@@ -8,11 +9,8 @@ import Home from "./components/home_component";
 import Profile from "./components/profile_component";
 import BoardUser from "./components/board-user.component";
 import BoardAdmin from "./components/board-admin.component";
-
 import { logout } from "./actions/auth";
-import { clearMessage } from "./actions/message";
 
-import { history } from './helpers/history';
 
 class App extends Component {
   constructor(props) {
@@ -24,9 +22,7 @@ class App extends Component {
       currentUser: undefined,
     };
 
-    history.listen((location) => {
-      props.dispatch(clearMessage()); 
-    });
+
   }
 
   componentDidMount() {
@@ -35,7 +31,7 @@ class App extends Component {
     if (user) {
       this.setState({
         currentUser: user,
-        showAdminBoard: user.roles.includes("ADMIN"),
+        showAdminBoard: user.userkg.role==="ADMIN",
       });
     }
   }
@@ -48,7 +44,6 @@ class App extends Component {
     const { currentUser, showAdminBoard } = this.state;
 
     return (
-      <Router history={history}>
         <div>
           <nav className="navbar navbar-expand navbar-dark bg-dark">
             <Link to={"/"} className="navbar-brand">
@@ -83,7 +78,7 @@ class App extends Component {
               <div className="navbar-nav ml-auto">
                 <li className="nav-item">
                   <Link to={"/profile"} className="nav-link">
-                    {currentUser.username}
+                    {currentUser.userkg.username} 
                   </Link>
                 </li>
                 <li className="nav-item">
@@ -114,7 +109,7 @@ class App extends Component {
             </Switch>
           </div>
         </div>
-      </Router>
+
     );
   }
 }
@@ -122,7 +117,7 @@ class App extends Component {
 function mapStateToProps(state) {
   const { user } = state.auth;
   return {
-    user,
+    user
   };
 }
 
