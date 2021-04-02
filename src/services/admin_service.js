@@ -7,18 +7,33 @@ const API_URL = 'http://localhost:8080/admin/';
 
 class AdminService {
 
-    addHaber(haber){
+    addHaber(haber) {
         return axios
-        .post(API_URL + "haber" , {haber} , { headers: authHeader()})
-        .then((response) => {
-            if(response.data==true){
-                alert("Haber Girişi Başarılı")
-            }
-            else{
-                alert("Başarısız")
-            }
-        })
+            .post(API_URL + "haber", { haber }, { headers: authHeader() })
+            .then((response) => {
+                if (response.data == true) {
+                    alert("Haber Girişi Başarılı")
+                }
+                else {
+                    alert("Başarısız")
+                }
+            })
     }
+
+
+    getTalep() {
+        return axios
+            .get(API_URL + "talepler", { headers: authHeader() })
+    }
+
+
+
+    talepOnay(talep) {
+        return axios
+        .post(API_URL + "onaytalep" , talep, { headers: authHeader() })
+
+    }
+
 
 
 

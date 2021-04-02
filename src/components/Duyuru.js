@@ -1,9 +1,5 @@
 import React, { Component } from 'react'
 import Form from "react-validation/build/form";
-import Input from "react-validation/build/input";
-import CheckButton from "react-validation/build/button";
-import { habergir } from "../actions/habergiris";
-import { connect } from 'react-redux';
 import AdminService from '../services/admin_service'
 
 
@@ -26,7 +22,6 @@ export default class Duyuru extends Component {
     submitHandler = e => {
         e.preventDefault()
         AdminService.addHaber(this.state.haber)
-
     }
 
     render() {
@@ -35,8 +30,9 @@ export default class Duyuru extends Component {
                 <Form onSubmit={this.submitHandler}>
                     <div className="form-group">
                         <label htmlFor="haber">Haber</label>
-                        <Input
-                            type="text"
+                        <textarea
+                        placeholder="Haberi giriniz" 
+                            type="textarea"
                             className="form-control"
                             name="haber"
                             value={this.state.haber}

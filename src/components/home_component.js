@@ -1,8 +1,11 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { Col, ListGroup, ListGroupItem, Row } from "reactstrap";
-
+import moment from 'moment'
+import 'moment/locale/tr'
 import UserService from "../services/user_service";
+
 
 export default class Home extends Component {
   constructor(props) {
@@ -51,9 +54,6 @@ export default class Home extends Component {
     );
 
 
-
-
-
   }
 
   render() {
@@ -62,39 +62,58 @@ export default class Home extends Component {
 
         <div className="container">
           <header className="jumbotron">
-           
+
             <h3> ANASAYFA</h3>
 
           </header>
         </div>
 
         <Row>
-          <Col xs="3">
-            DOĞUM GÜNÜ OLAN ÇALIŞANLAR
-                  <ListGroup>
-              {this.state.dogumgunleri.map(dogum => (
-                <ListGroupItem
-                  key={dogum.username}>
-                  {dogum.name} {dogum.surname}
-                </ListGroupItem>
+          {this.state.dogumgunleri.length != 0 && (
+            <Col xs="3">
 
-              ))}
-            </ListGroup>
-          </Col>
+              <table class="table">
+                <thead class="thead-dark">
+                  <tr>
+                    <th>Doğum Günü</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {this.state.dogumgunleri.map(dogum => (
+                    <tr key={dogum.username}>
+                      <td>{dogum.name} {dogum.surname}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+
+
+            </Col>
+          )}
 
 
           <Col xs="9">
-            HABERLER
-            <ListGroup>
-              {this.state.news.map(haber => (
-                <ListGroupItem
-                  key={haber.id}>
-                  {haber.haber} {haber.date}
-                </ListGroupItem>
-              )
 
-              )}
-            </ListGroup>
+            <table class="table">
+              <thead class="thead-dark">
+                <tr>
+                  <th>Tarih</th>
+                  <th>Haber</th>
+                </tr>
+              </thead>
+              <tbody>
+                {this.state.news.map(haber => (
+                  <tr key={haber.id}>
+                    <td>{moment().locale('tr'),
+                      moment(haber.date).format('LL')}</td>
+                    <td>{haber.haber}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+
+
+
 
           </Col>
 
@@ -106,13 +125,8 @@ export default class Home extends Component {
 
 
 
-
-
-
-
-
-
-
     );
   }
 }
+
+

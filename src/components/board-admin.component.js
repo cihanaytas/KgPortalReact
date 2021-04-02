@@ -1,16 +1,18 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import { Route, Switch, } from "react-router";
+import { Redirect, Route, Switch, } from "react-router";
 import { Col, Row } from "reactstrap";
 
 import UserService from "../services/user_service";
 import Home from "./home_component";
-import İletisim from "./board-iletisim";
+import İletisim from "./iletisim";
 import Profile from './profile_component'
 import Duyuru from "./Duyuru";
+import Talep from "./Talep";
+import { connect } from "react-redux";
 
 
-export default class BoardAdmin extends Component {
+class BoardAdmin extends Component {
   constructor(props) {
     super(props);
 
@@ -42,8 +44,11 @@ export default class BoardAdmin extends Component {
 
   render() {
 
+    if ( this.props.user.userkg.role!="ADMIN") {
+      return <Redirect to="/" />;
+    }
     return (
-      <div>
+        <div>
         <div className="container">
           <header className="jumbotron">
             <h3>{this.state.content}</h3>
@@ -55,12 +60,12 @@ export default class BoardAdmin extends Component {
    
               <li className="nav-item">
                 <Link to={"/admin/duyuru"} className="nav-link">
-                  İnsan Kaynaklar
+                  İnsan Kaynakları
                   </Link>
               </li>
               <li className="nav-item">
-                <Link to={"/user"} className="nav-link">
-                  Muhasebe
+                <Link to={"/admin/talep"} className="nav-link">
+                  Talepler
                   </Link>
               </li>
               <li className="nav-item">
@@ -84,16 +89,27 @@ export default class BoardAdmin extends Component {
 
         <div className="container mt-3">
           <Switch>
-            <Route exact path={["/", "/sda"]} component={Home} />
+            <Route exact path={["/", "/home"]} component={Home} />
             <Route path="/admin/iletisim" component={İletisim} />
             <Route path="/admin/duyuru" component={Duyuru} />
+            <Route path="/admin/talep" component={Talep} />
           </Switch>
 
         </div>
 
 
       </div>
-
+     
     );
   }
 }
+
+
+function mapStateToProps(state) {
+  const { user } = state.auth;
+  return {
+    user
+  };
+}
+
+export default connect(mapStateToProps)(BoardAdmin);
