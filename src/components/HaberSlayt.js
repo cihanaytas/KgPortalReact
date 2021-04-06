@@ -13,9 +13,6 @@ import 'moment/locale/tr'
 
 
 
-
-const items = [];
-
 const HaberSlayt = (props) => {
     
   const [activeIndex, setActiveIndex] = useState(0);
@@ -23,13 +20,14 @@ const HaberSlayt = (props) => {
 
   const next = () => {
     if (animating) return;
-    const nextIndex = activeIndex === items.length - 1 ? 0 : activeIndex + 1;
+    const nextIndex = activeIndex === props.haberler.length - 1 ? 0 : activeIndex + 1;
+ 
     setActiveIndex(nextIndex);
   }
 
   const previous = () => {
     if (animating) return;
-    const nextIndex = activeIndex === 0 ? items.length - 1 : activeIndex - 1;
+    const nextIndex = activeIndex === 0 ? props.haberler.length - 1 : activeIndex - 1;
     setActiveIndex(nextIndex);
   }
 
@@ -54,11 +52,12 @@ const HaberSlayt = (props) => {
         key={item.id}
         onExiting={() => setAnimating(true)}
         onExited={() => setAnimating(false)}
+        
       >
-        <CarouselCaption className="text-danger" captionText={
-              moment().locale('tr'),
- 
-            moment(item.date).format('LL')} captionHeader={item.haber} />
+        <CarouselCaption className="text" captionText={
+              moment().locale('tr'),moment(item.date).format('LL')}
+               captionHeader={item.haber} />
+                <img src="https://tinyurl.com/4dp8vnth" />
       </CarouselItem>
     );
   });
@@ -79,7 +78,7 @@ const HaberSlayt = (props) => {
         next={next}
         previous={previous}
       >
-        <CarouselIndicators items={items} activeIndex={activeIndex} onClickHandler={goToIndex} />
+        <CarouselIndicators items={props.haberler} activeIndex={activeIndex} onClickHandler={goToIndex} />
         {slides}
         <CarouselControl direction="prev" directionText="Previous" onClickHandler={previous} />
         <CarouselControl direction="next" directionText="Next" onClickHandler={next} />
