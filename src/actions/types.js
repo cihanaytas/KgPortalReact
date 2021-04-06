@@ -9,3 +9,5 @@ export const CLEAR_MESSAGE = "CLEAR_MESSAGE";
 
 
 export const HABER_SUCCESS = "HABER_SUCCESS"
+
+export const HABER_BASARILI = " HABER_BASARILI"

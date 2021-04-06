@@ -1,13 +1,16 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import { Col, ListGroup, ListGroupItem, Row } from "reactstrap";
+import {Col, Row } from "reactstrap";
 import moment from 'moment'
 import 'moment/locale/tr'
 import UserService from "../services/user_service";
+import * as haberleraction from "../actions/haberler";
+import { bindActionCreators } from "redux";
+import HaberSlayt from "./HaberSlayt";
 
 
-export default class Home extends Component {
+class Home extends Component {
   constructor(props) {
     super(props);
 
@@ -16,6 +19,12 @@ export default class Home extends Component {
       news: []
     };
   }
+
+
+
+
+
+
 
   componentDidMount() {
 
@@ -37,24 +46,29 @@ export default class Home extends Component {
     );
 
 
-    UserService.getNews().then(
-      response => {
-        this.setState({
-          news: response.data
-        });
-      },
-      error => {
-        this.setState({
-          content:
-            (error.response && error.response.data) ||
-            error.message ||
-            error.toString()
-        });
-      }
-    );
+    // UserService.getNews().then(
 
+    //   response => {
+    //     this.setState({
+    //       news: response.data
+    //     });
+    //   },
+    //   error => {
+    //     this.setState({
+    //       content:
+    //         (error.response && error.response.data) ||
+    //         error.message ||
+    //         error.toString()
+    //     });
+    //   }
+    // );
+
+
+    this.props.actions.getHaberlers();
 
   }
+
+
 
   render() {
     return (
@@ -94,6 +108,10 @@ export default class Home extends Component {
 
           <Col xs="9">
 
+  
+
+
+            {/* 
             <table class="table">
               <thead class="thead-dark">
                 <tr>
@@ -102,7 +120,7 @@ export default class Home extends Component {
                 </tr>
               </thead>
               <tbody>
-                {this.state.news.map(haber => (
+                {this.props.haberler.map(haber => (
                   <tr key={haber.id}>
                     <td>{moment().locale('tr'),
                       moment(haber.date).format('LL')}</td>
@@ -110,7 +128,10 @@ export default class Home extends Component {
                   </tr>
                 ))}
               </tbody>
-            </table>
+            </table> */}
+
+
+<HaberSlayt/>
 
 
 
@@ -130,3 +151,21 @@ export default class Home extends Component {
 }
 
 
+function mapStateToProps(state) {
+  return {
+    haberler: state.testhaber
+  };
+}
+
+
+
+
+function mapDispatchToProps(dispatch) {
+  return {
+    actions: {
+      getHaberlers: bindActionCreators(haberleraction.getNews, dispatch)
+    }
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Home);

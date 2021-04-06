@@ -13,8 +13,8 @@ class UserService {
     return axios.get(API_URL + 'home/birth', { headers: authHeader() });
   }
 
-  getNews(){
-    return axios.get(API_URL + 'home/news', { headers: authHeader() });
+  getNewss(){
+    return axios.get(API_URL + 'home/news', { headers: authHeader() })
   }
 
   getUserBoard() {

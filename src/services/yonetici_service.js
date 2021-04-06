@@ -13,6 +13,13 @@ class YoneticiService {
  }
 
 
+
+ getTaleplerim(){
+     return axios
+     .get(API_URL + "taleplerim",  { headers: authHeader() })
+ }
+
+
 }
 
 

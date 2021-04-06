@@ -1,10 +1,9 @@
 import React, { Component } from 'react'
-import { Table, Button } from "reactstrap";
+import { Table } from "reactstrap";
 import AdminService from '../services/admin_service'
 import YoneticiService from '../services/yonetici_service'
 import moment from 'moment'
 import 'moment/locale/tr'
-import { Redirect } from 'react-router';
 import { connect } from 'react-redux';
 import alertify from "alertifyjs"
 import Form from "react-validation/build/form";
@@ -28,7 +27,6 @@ class Talep extends Component {
         this.state = {
             Talepler: [],
             talepobje: {
-                rol: '',
                 sayi: '',
                 butce: '',
                 proje: '',
