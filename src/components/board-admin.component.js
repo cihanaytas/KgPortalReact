@@ -1,15 +1,12 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { Redirect, Route, Switch, } from "react-router";
-import { Col, Row } from "reactstrap";
-
-import UserService from "../services/user_service";
 import Home from "./home_component";
 import İletisim from "./iletisim";
-import Profile from './profile_component'
 import Duyuru from "./Duyuru";
 import Talep from "./Talep";
 import { connect } from "react-redux";
+import AdminIzinTalepler from "./AdminIzinTalepler";
 
 
 class BoardAdmin extends Component {
@@ -17,30 +14,12 @@ class BoardAdmin extends Component {
     super(props);
 
     this.state = {
-      content: ""
+    
+      
     };
 
   }
 
-  componentDidMount() {
-    UserService.getAdminBoard().then(
-      response => {
-        this.setState({
-          content: response.data
-        });
-      },
-      error => {
-        this.setState({
-          content:
-            (error.response &&
-              error.response.data &&
-              error.response.data.message) ||
-            error.message ||
-            error.toString()
-        });
-      }
-    );
-  }
 
   render() {
 
@@ -51,7 +30,7 @@ class BoardAdmin extends Component {
         <div>
         <div className="container">
           <header className="jumbotron">
-            <h3>{this.state.content}</h3>
+            <h3>İK</h3>
           </header>
         </div>
 
@@ -65,9 +44,16 @@ class BoardAdmin extends Component {
               </li>
               <li className="nav-item">
                 <Link to={"/admin/talep"} className="nav-link">
-                  Talepler
+                  Yönetici Talepleri
                   </Link>
               </li>
+
+              <li className="nav-item">
+                <Link to={"/admin/izintalep"} className="nav-link">
+                  İzin Talepleri
+                  </Link>
+              </li>
+
               <li className="nav-item">
                 <Link to={"/user"} className="nav-link">
                   Organizasyon Şeması
@@ -93,6 +79,7 @@ class BoardAdmin extends Component {
             <Route path="/admin/iletisim" component={İletisim} />
             <Route path="/admin/duyuru" component={Duyuru} />
             <Route path="/admin/talep" component={Talep} />
+            <Route path="/admin/izintalep" component={AdminIzinTalepler} />
           </Switch>
 
         </div>

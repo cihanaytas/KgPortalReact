@@ -19,6 +19,18 @@ class YoneticiService {
      .get(API_URL + "taleplerim",  { headers: authHeader() })
  }
 
+ getIzinTalepleri(){
+     return axios
+     .get(API_URL + "izintalepleri", { headers: authHeader() })
+ }
+
+
+ talepOnay(talep) {
+    return axios
+    .post(API_URL + "onaytalep" , talep, { headers: authHeader() })
+
+}
+
 
 }
 

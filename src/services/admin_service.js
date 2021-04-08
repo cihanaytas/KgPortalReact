@@ -35,6 +35,19 @@ class AdminService {
     }
 
 
+    getIzinTalepleri(){
+        return axios
+        .get(API_URL + "izintalepleri", { headers: authHeader() })
+    }
+
+
+    izinTalepOnay(talep) {
+        return axios
+        .post(API_URL + "izinonaytalep" , talep, { headers: authHeader() })
+
+    }
+
+
 
 
 }

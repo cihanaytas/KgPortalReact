@@ -35,19 +35,9 @@ export function getNewsSuccess(news) {
 
 export function getNews() {
     return function (dispatch) {
-     
-        return axios.get("http://localhost:8080/home/news", { headers: authHeader() }).then(
- 
-            response=>response.data) .then(
-              
-                result => dispatch(getNewsSuccess(result))
-            )
-
-        // UserService.getNewss.then(
-        //     response => response.json())
-        //     .then(result=>dispatch(getNewsSuccess(result)))
-
-
+        UserService.getNewss().then(
+            response => response.data)
+            .then(result=>dispatch(getNewsSuccess(result)))
 
     }
    

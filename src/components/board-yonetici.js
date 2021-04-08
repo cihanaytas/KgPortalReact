@@ -10,6 +10,7 @@ import Talep from "./Talep";
 import YoneticiService from "../services/yonetici_service";
 import Taleplerim from "./yoneticiTaleplerim";
 import Example from "./HaberSlayt";
+import YoneticiIzinTalepler from "./YoneticiIzinTalepler";
 
 
 
@@ -82,6 +83,12 @@ class BoardYonetici extends Component {
                              </Link>
                         </li>
 
+                        
+                        <li>
+                            <Link to={"/yonetici/izintalepleri"} className="nav-link">
+                                Personel İzin Talepleri
+                             </Link>
+                        </li>
 
 
 
@@ -111,6 +118,8 @@ class BoardYonetici extends Component {
                         <Route path="/yonetici/duyuru" component={Duyuru} />
                         <Route path="/yonetici/talep" component={Talep} />
                         <Route path="/yonetici/taleplerim" component={Taleplerim} />
+                        <Route path="/yonetici/izintalepleri" component={YoneticiIzinTalepler} />
+                        izintalepleri
 
                     </Switch>
 

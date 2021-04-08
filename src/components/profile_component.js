@@ -1,6 +1,10 @@
 import React, { Component } from "react";
 import { Redirect } from 'react-router-dom';
 import { connect } from "react-redux";
+import moment from 'moment'
+import 'moment/locale/tr'
+
+
 
 class Profile extends Component {
 
@@ -16,7 +20,13 @@ class Profile extends Component {
       <div className="container">
         <header className="jumbotron">
           <h3>
-            <strong>{currentUser.userkg.username}</strong> Profile
+            <strong>Profil</strong> 
+          <br/>   <br/> 
+            {currentUser.userkg.username}  <br/>   <br/> 
+            {currentUser.userkg.name}   {currentUser.userkg.surname}
+             <br/>   <br/> 
+            {moment().locale('tr'), moment(currentUser.userkg.birthDay).format('LL')
+            }  <br/>   <br/> 
           </h3>
         </header>
 

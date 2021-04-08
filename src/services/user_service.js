@@ -25,6 +25,26 @@ class UserService {
   getAdminBoard() {
     return axios.get(API_URL + 'admin', { headers: authHeader() });
   }
+
+
+  getOrganization(){
+    return axios.get(API_URL + "organization",{ headers: authHeader() } )
+  }
+
+
+  addIzinTalep(izinTalep){
+    return axios.post
+    (API_URL + "user/izintalep",izinTalep, { headers: authHeader() })
+  }
+
+  getIzinTalepleri(){
+    return axios
+    .get(API_URL + "user/izintalepleri", { headers: authHeader() })
+}
+
+
+  
+
 }
 
 export default new UserService();
