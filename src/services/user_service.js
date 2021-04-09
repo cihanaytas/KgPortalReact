@@ -42,6 +42,11 @@ class UserService {
     .get(API_URL + "user/izintalepleri", { headers: authHeader() })
 }
 
+getBildirimler(){
+  return axios
+  .get(API_URL + "user/bildirimler", { headers: authHeader() })
+}
+
 
   
 

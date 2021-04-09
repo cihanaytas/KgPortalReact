@@ -28,8 +28,15 @@ class YoneticiService {
  talepOnay(talep) {
     return axios
     .post(API_URL + "onaytalep" , talep, { headers: authHeader() })
-
 }
+
+
+
+addBildirim(user,bildirim){
+    return axios
+    .post(API_URL + "bildirimgonder", {user,bildirim}, { headers: authHeader() })
+}
+
 
 
 }

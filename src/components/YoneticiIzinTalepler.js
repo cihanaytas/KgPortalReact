@@ -18,12 +18,14 @@ export default class YoneticiIzinTalepler extends Component {
     onayla(talep) {
         talep.onayDurum = "ik"
         YoneticiService.talepOnay(talep)
+        YoneticiService.addBildirim(talep.user,"Talebiniz yöneticiniz tarafından İK'ya iletildi.")
         this.setState({})
     }
 
     reddet(talep) {
         talep.onayDurum = "Reddedildi"
         YoneticiService.talepOnay(talep)
+        YoneticiService.addBildirim(talep.user,"Talebiniz yöneticiniz tarafından reddedildi.")
         this.setState({})
 
     }
@@ -68,7 +70,7 @@ export default class YoneticiIzinTalepler extends Component {
                         {this.state.IzinTalepler.map(talep => (
                             <tr key={talep.id}>
                                 <th scope="row">{talep.id}</th>
-                                <td>{talep.user.name} {talep.user.surname}</td>
+                                <td>{talep.user_name} {talep.user_surname}</td>
                                 <td>{moment().locale('tr'),
                                     moment(talep.talepTarih).format('LL')}</td>
                                 {moment(talep.izinBaslangicTarih).format('YYYY') === moment(talep.izinBitisTarih).format('YYYY') &&

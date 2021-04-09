@@ -244,7 +244,7 @@ class Talep extends Component {
                                 <th scope="row">{talep.id}</th>
                                 <td>{moment().locale('tr'),
                                     moment(talep.tarih).format('LL')}</td>
-                                <td>{talep.user.name} {talep.user.surname}</td>
+                                <td>{talep.name} {talep.surname}</td>
                                 <td>{talep.rol}</td>
                                 <td>{talep.sayi}</td>
                                 <td>{talep.butce}</td>

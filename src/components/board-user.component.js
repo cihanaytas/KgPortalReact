@@ -9,6 +9,7 @@ import Home from "./home_component";
 import { connect } from "react-redux";
 import UserIzin from "./UserIzin";
 import UserIzinTalepler from "./UserIzinTalepler";
+import UserBildirim from "./UserBildirim";
 
 
 
@@ -70,6 +71,12 @@ class BoardUser extends Component {
                 İletişim
                   </Link>
             </li>
+            <li className="nav-item">
+                <Link to={"/user/bildirimler"} className="nav-link">
+                  Bildirimler
+                </Link>
+              </li>
+            
           </div>
         </nav>
 
@@ -82,6 +89,7 @@ class BoardUser extends Component {
             <Route path="/user/izintalepler" component={UserIzinTalepler} />
             <Route path="/admin/duyuru" component={Duyuru} />
             <Route path="/admin/talep" component={Talep} />
+            <Route path="/user/bildirimler" component={UserBildirim} />
           </Switch>
 
         </div>
