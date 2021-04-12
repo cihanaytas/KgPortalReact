@@ -16,16 +16,14 @@ export default class YoneticiIzinTalepler extends Component {
     }
 
     onayla(talep) {
-        talep.onayDurum = "ik"
-        YoneticiService.talepOnay(talep)
-        YoneticiService.addBildirim(talep.user,"Talebiniz yöneticiniz tarafından İK'ya iletildi.")
+        talep.onayDurum= "ik"
+        YoneticiService.talepOnay(talep.id,talep.onayDurum)
         this.setState({})
     }
 
     reddet(talep) {
-        talep.onayDurum = "Reddedildi"
-        YoneticiService.talepOnay(talep)
-        YoneticiService.addBildirim(talep.user,"Talebiniz yöneticiniz tarafından reddedildi.")
+        talep.onayDurum= "Reddedildi"
+        YoneticiService.talepOnay(talep.id,talep.onayDurum)
         this.setState({})
 
     }

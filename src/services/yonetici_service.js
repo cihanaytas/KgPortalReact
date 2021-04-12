@@ -2,7 +2,7 @@ import axios from 'axios';
 import authHeader from './auth_header';
 
 const API_URL = 'http://localhost:8080/yonetici/';
-
+const FormData = require('form-data');
 
 
 class YoneticiService {
@@ -25,17 +25,12 @@ class YoneticiService {
  }
 
 
- talepOnay(talep) {
+ talepOnay(talepId,durum) {
+
     return axios
-    .post(API_URL + "onaytalep" , talep, { headers: authHeader() })
+    .post(API_URL + "onaytalep/" + talepId + "/" + durum, {data:{}} ,   { headers: authHeader() })
 }
 
-
-
-addBildirim(user,bildirim){
-    return axios
-    .post(API_URL + "bildirimgonder", {user,bildirim}, { headers: authHeader() })
-}
 
 
 

@@ -41,16 +41,13 @@ class AdminService {
     }
 
 
-    izinTalepOnay(talep) {
+    izinTalepOnay(talepId,durum) {
         return axios
-        .post(API_URL + "izinonaytalep" , talep, { headers: authHeader() })
+        .post(API_URL + "izinonaytalep/" + talepId + "/" + durum, {data:{}} ,   { headers: authHeader() })
 
     }
 
-    addBildirim(user,bildirim){
-        return axios
-        .post(API_URL + "bildirimgonder", {user,bildirim}, { headers: authHeader() })
-    }
+
 
 
 

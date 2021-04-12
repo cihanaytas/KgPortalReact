@@ -16,22 +16,20 @@ export default class AdminIzinTalepler extends Component {
     }
 
     onayla(talep) {
-        talep.onayDurum = "Onaylandı"
-        AdminService.izinTalepOnay(talep)
-        AdminService.addBildirim(talep.user,"Talebiniz onaylanmıştır.")
+        talep.onayDurum= "Onaylandı"
+        AdminService.izinTalepOnay(talep.id,talep.onayDurum)
         this.setState({})
     }
 
     reddet(talep) {
-        talep.onayDurum = "Reddedildi"
-        AdminService.izinTalepOnay(talep)
-        AdminService.addBildirim(talep.user,"Talebiniz İK tarafından reddedilmiştir.")
+        talep.onayDurum= "Reddedildi"
+        AdminService.izinTalepOnay(talep.id,talep.onayDurum)
         this.setState({})
 
     }
 
-
-    componentDidMount() {
+    
+    getTalepler(){
         AdminService.getIzinTalepleri().then(
             response => {
                 this.setState({
@@ -47,6 +45,11 @@ export default class AdminIzinTalepler extends Component {
                 });
             }
         )
+    }
+
+
+    componentDidMount() {
+        this.getTalepler()
     }
 
     render() {
