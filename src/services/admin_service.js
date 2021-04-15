@@ -28,9 +28,9 @@ class AdminService {
 
 
 
-    talepOnay(talep) {
+    talepOnay(talepId,durum) {
         return axios
-        .post(API_URL + "onaytalep" , talep, { headers: authHeader() })
+        .post(API_URL + "onaytalep/" + talepId + "/" + durum, {data:{}} ,   { headers: authHeader() })
 
     }
 

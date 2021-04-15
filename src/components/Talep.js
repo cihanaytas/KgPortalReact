@@ -40,13 +40,13 @@ class Talep extends Component {
 
     onayla(talep) {
         talep.onay = "Onaylandı"
-        AdminService.talepOnay(talep)
+        AdminService.talepOnay(talep.id,talep.onay)
         this.setState({})
     }
 
     reddet(talep) {
         talep.onay = "Reddedildi"
-        AdminService.talepOnay(talep)
+        AdminService.talepOnay(talep.id,talep.onay)
         this.setState({})
 
     }
